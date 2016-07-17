@@ -1,15 +1,15 @@
 # Copyright (c) 2007 - 2016 Joseph Gaeddert
-# 
+#
 # Permission is hereby granted, free of charge, to any person obtaining a copy
 # of this software and associated documentation files (the "Software"), to deal
 # in the Software without restriction, including without limitation the rights
 # to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
 # copies of the Software, and to permit persons to whom the Software is
 # furnished to do so, subject to the following conditions:
-# 
+#
 # The above copyright notice and this permission notice shall be included in
 # all copies or substantial portions of the Software.
-# 
+#
 # THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
 # IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
 # FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
@@ -18,7 +18,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 # THE SOFTWARE.
 
-# 
+#
 # liquid-dsp library configure
 # Process with autoconf to generate configure script
 #
@@ -133,10 +133,10 @@ AX_GCC_ARCHFLAG([no],[],[])
 # override SIMD
 if test "${enable_simdoverride+set}" = set; then
     # portable C version
-    MLIBS_DOTPROD="src/dotprod/src/dotprod_cccf.o \
-                   src/dotprod/src/dotprod_crcf.o \
-                   src/dotprod/src/dotprod_rrrf.o \
-                   src/dotprod/src/sumsq.o"
+    MLIBS_DOTPROD="$srcdir/src/dotprod/src/dotprod_cccf.o \
+                   $srcdir/src/dotprod/src/dotprod_crcf.o \
+                   $srcdir/src/dotprod/src/dotprod_rrrf.o \
+                   $srcdir/src/dotprod/src/sumsq.o"
     ARCH_OPTION=""
 else
     # Check canonical system
@@ -155,68 +155,68 @@ else
 
         if [ test "$ax_cv_have_sse41_ext" = yes && test "$ac_cv_header_smmintrin_h" = yes ]; then
             # SSE4.1/2 extensions
-            MLIBS_DOTPROD="src/dotprod/src/dotprod_cccf.mmx.o \
-                           src/dotprod/src/dotprod_crcf.mmx.o \
-                           src/dotprod/src/dotprod_rrrf.mmx.o \
-                           src/dotprod/src/sumsq.mmx.o"
+            MLIBS_DOTPROD="$srcdir/src/dotprod/src/dotprod_cccf.mmx.o \
+                           $srcdir/src/dotprod/src/dotprod_crcf.mmx.o \
+                           $srcdir/src/dotprod/src/dotprod_rrrf.mmx.o \
+                           $srcdir/src/dotprod/src/sumsq.mmx.o"
         elif [ test "$ax_cv_have_sse2_ext" = yes && test "$ac_cv_header_emmintrin_h" = yes ]; then
             # SSE2 extensions
-            MLIBS_DOTPROD="src/dotprod/src/dotprod_cccf.mmx.o \
-                           src/dotprod/src/dotprod_crcf.mmx.o \
-                           src/dotprod/src/dotprod_rrrf.mmx.o \
-                           src/dotprod/src/sumsq.mmx.o"
+            MLIBS_DOTPROD="$srcdir/src/dotprod/src/dotprod_cccf.mmx.o \
+                           $srcdir/src/dotprod/src/dotprod_crcf.mmx.o \
+                           $srcdir/src/dotprod/src/dotprod_rrrf.mmx.o \
+                           $srcdir/src/dotprod/src/sumsq.mmx.o"
         else
             # portable C version
-            MLIBS_DOTPROD="src/dotprod/src/dotprod_cccf.o \
-                           src/dotprod/src/dotprod_crcf.o \
-                           src/dotprod/src/dotprod_rrrf.o \
-                           src/dotprod/src/sumsq.o"
+            MLIBS_DOTPROD="$srcdir/src/dotprod/src/dotprod_cccf.o \
+                           $srcdir/src/dotprod/src/dotprod_crcf.o \
+                           $srcdir/src/dotprod/src/dotprod_rrrf.o \
+                           $srcdir/src/dotprod/src/sumsq.o"
         fi;;
     powerpc*)
-        MLIBS_DOTPROD="src/dotprod/src/dotprod_cccf.o \
-                       src/dotprod/src/dotprod_rrrf.av.o \
-                       src/dotprod/src/dotprod_crcf.av.o \
-                       src/dotprod/src/sumsq.o"
+        MLIBS_DOTPROD="$srcdir/src/dotprod/src/dotprod_cccf.o \
+                       $srcdir/src/dotprod/src/dotprod_rrrf.av.o \
+                       $srcdir/src/dotprod/src/dotprod_crcf.av.o \
+                       $srcdir/src/dotprod/src/sumsq.o"
         ARCH_OPTION="-fno-common -faltivec";;
     armv1*|armv2*|armv3*|armv4*|armv5*|armv6*)
         # assume neon instructions are NOT available
-        MLIBS_DOTPROD="src/dotprod/src/dotprod_cccf.o \
-                       src/dotprod/src/dotprod_crcf.o \
-                       src/dotprod/src/dotprod_rrrf.o \
-                       src/dotprod/src/sumsq.o"
+        MLIBS_DOTPROD="$srcdir/src/dotprod/src/dotprod_cccf.o \
+                       $srcdir/src/dotprod/src/dotprod_crcf.o \
+                       $srcdir/src/dotprod/src/dotprod_rrrf.o \
+                       $srcdir/src/dotprod/src/sumsq.o"
         ARCH_OPTION="-ffast-math";;
     armv7*|armv8*)
         # assume neon instructions are available
         # TODO: check for Neon availability
 
         # ARM architecture : use neon extensions
-        MLIBS_DOTPROD="src/dotprod/src/dotprod_cccf.neon.o \
-                       src/dotprod/src/dotprod_crcf.neon.o \
-                       src/dotprod/src/dotprod_rrrf.neon.o \
-                       src/dotprod/src/sumsq.o"
+        MLIBS_DOTPROD="$srcdir/src/dotprod/src/dotprod_cccf.neon.o \
+                       $srcdir/src/dotprod/src/dotprod_crcf.neon.o \
+                       $srcdir/src/dotprod/src/dotprod_rrrf.neon.o \
+                       $srcdir/src/dotprod/src/sumsq.o"
         # TODO: check these flags
         #ARCH_OPTION="-ffast-math -mcpu=cortex-a8 -mfloat-abi=softfp -mfpu=neon";;
         ARCH_OPTION="-ffast-math -mcpu=cortex-a7 -mfloat-abi=hard -mfpu=neon-vfpv4";;
     *)
         # unknown architecture : use portable C version
-        MLIBS_DOTPROD="src/dotprod/src/dotprod_cccf.o \
-                       src/dotprod/src/dotprod_crcf.o \
-                       src/dotprod/src/dotprod_rrrf.o \
-                       src/dotprod/src/sumsq.o"
+        MLIBS_DOTPROD="$srcdir/src/dotprod/src/dotprod_cccf.o \
+                       $srcdir/src/dotprod/src/dotprod_crcf.o \
+                       $srcdir/src/dotprod/src/dotprod_rrrf.o \
+                       $srcdir/src/dotprod/src/sumsq.o"
         ARCH_OPTION="";;
     esac
 fi
 
 
 # for now all vector operations are portable C versions
-MLIBS_VECTOR="src/vector/src/vectorf_add.port.o   \
-              src/vector/src/vectorf_norm.port.o  \
-              src/vector/src/vectorf_mul.port.o   \
-              src/vector/src/vectorf_trig.port.o  \
-              src/vector/src/vectorcf_add.port.o  \
-              src/vector/src/vectorcf_norm.port.o \
-              src/vector/src/vectorcf_mul.port.o  \
-              src/vector/src/vectorcf_trig.port.o"
+MLIBS_VECTOR="$srcdir/src/vector/src/vectorf_add.port.o   \
+              $srcdir/src/vector/src/vectorf_norm.port.o  \
+              $srcdir/src/vector/src/vectorf_mul.port.o   \
+              $srcdir/src/vector/src/vectorf_trig.port.o  \
+              $srcdir/src/vector/src/vectorcf_add.port.o  \
+              $srcdir/src/vector/src/vectorcf_norm.port.o \
+              $srcdir/src/vector/src/vectorcf_mul.port.o  \
+              $srcdir/src/vector/src/vectorcf_trig.port.o"
 
 case $target_os in
 darwin*)
@@ -233,7 +233,7 @@ esac
 # autoconf variable substitutions
 #
 AC_SUBST(LIBS)                      # shared libraries (-lc, -lm, etc.)
-AC_SUBST(MLIBS_DOTPROD)             # 
+AC_SUBST(MLIBS_DOTPROD)             #
 AC_SUBST(MLIBS_VECTOR)              #
 
 AC_SUBST(SH_LIB)                    # output shared library target
